@@ -14,14 +14,14 @@ def melhor_configuracao():
     data = request.json
     componentes = componentesJson
     limite_valor = data.get('limite_valor')
-    peso_pontuacoes = data.get('peso_pontuacoes')
+    
 
-    if not componentes or not limite_valor or not peso_pontuacoes:
+    if not componentes or not limite_valor :
         return jsonify({'error': 'Dados incompletos fornecidos'}), 400
 
 
     melhor_config, custo_final, pontuacao_final = algoritmo_genetico(
-        componentes, limite_valor, peso_pontuacoes
+        componentes, limite_valor
     )
 
     if melhor_config:

@@ -52,8 +52,17 @@ def mutacao(configuracao, componentes, taxa_mutacao):
         configuracao[tipo_mutacao] = escolha_mutacao
     return configuracao
 
-def algoritmo_genetico(componentes, limite_valor, peso_pontuacoes, geracoes=5000, tamanho_populacao=5000, taxa_mutacao=0.9):
+def algoritmo_genetico(componentes, limite_valor,  geracoes=5000, tamanho_populacao=5000, taxa_mutacao=0.9):
     populacao = []
+    peso_pontuacoes = {
+    "placa_mae": 1.0,
+    "processador": 2.0,
+    "memoria_ram": 1.0,
+    "placa_de_video": 2.0,
+    "fonte": 0.5,
+    "resfriamento": 0.5
+    
+    }
     while not populacao:
         populacao = [criar_configuracao_aleatoria(componentes, limite_valor) for _ in range(tamanho_populacao)]
 
