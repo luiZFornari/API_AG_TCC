@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from AG import algoritmo_genetico
 import json
+import os
 
 
 app = Flask(__name__)
@@ -33,4 +34,5 @@ def melhor_configuracao():
         return jsonify({'message': 'Não foi encontrada uma configuração válida dentro do limite de valor'}), 404
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
+
