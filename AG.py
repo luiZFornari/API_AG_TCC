@@ -60,8 +60,8 @@ def algoritmo_genetico(componentes, limite_valor,  geracoes=5000, tamanho_popula
     "memoria_ram": 1.0,
     "placa_de_video": 2.0,
     "fonte": 0.5,
-    "resfriamento": 0.5
-    
+    "resfriamento": 0.5,
+    "armazenamento": 1.0
     }
     while not populacao:
         populacao = [criar_configuracao_aleatoria(componentes, limite_valor) for _ in range(tamanho_populacao)]

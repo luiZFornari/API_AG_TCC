@@ -6,7 +6,7 @@ import os
 
 app = Flask(__name__)
 
-with open('componentes.json', 'r') as json_file:
+with open('componentes2.json', 'r') as json_file:
     componentesJson = json.load(json_file)
 
 @app.route('/api/melhor_configuracao', methods=['POST'])
