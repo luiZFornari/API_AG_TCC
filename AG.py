@@ -1,7 +1,6 @@
 import random
 import copy
 
-# Função para selecionar os pais usando o método de torneio
 def selecionar_pais(populacao, componentes, peso_pontuacoes):
     pais = []
     for _ in range(len(populacao)):
@@ -12,7 +11,7 @@ def selecionar_pais(populacao, componentes, peso_pontuacoes):
 def criar_configuracao_aleatoria(componentes, limite_valor):
     configuracao = {}
     for tipo, opcoes in componentes.items():
-        opcoes_abaixo_do_limite = [comp for comp in opcoes if opcoes[comp]["price"] <= limite_valor]
+        opcoes_abaixo_do_limite = [comp for comp in opcoes if "price" in opcoes[comp] and opcoes[comp]["price"] <= limite_valor]
         if opcoes_abaixo_do_limite:
             componente_escolhido = random.choice(opcoes_abaixo_do_limite)
             configuracao[tipo] = componente_escolhido
@@ -40,7 +39,8 @@ def crossover(configuracao1, configuracao2):
     nova_configuracao = {}
     ponto_crossover = random.choice(list(configuracao1.keys()))
     for tipo in configuracao1:
-        escolha = configuracao1[tipo] if tipo != ponto_crossover else configuracao2[tipo]
+        # Alteração para que a escolha seja aleatória entre os pais
+        escolha = configuracao1[tipo] if random.random() < 0.5 else configuracao2[tipo]
         nova_configuracao[tipo] = escolha
     return nova_configuracao
 
@@ -55,13 +55,13 @@ def mutacao(configuracao, componentes, taxa_mutacao):
 def algoritmo_genetico(componentes, limite_valor,  geracoes=5000, tamanho_populacao=5000, taxa_mutacao=0.9):
     populacao = []
     peso_pontuacoes = {
-    "placa_mae": 1.0,
-    "processador": 2.0,
-    "memoria_ram": 1.0,
-    "placa_de_video": 2.0,
-    "fonte": 0.5,
-    "resfriamento": 0.5,
-    "armazenamento": 1.0
+        "placa_mae": 1.0,
+        "processador": 2.0,
+        "memoria_ram": 1.0,
+        "placa_de_video": 2.0,
+        "fonte": 0.5,
+        "resfriamento": 0.5,
+        "armazenamento": 1.0,
     }
     while not populacao:
         populacao = [criar_configuracao_aleatoria(componentes, limite_valor) for _ in range(tamanho_populacao)]

@@ -9,10 +9,19 @@ app = Flask(__name__)
 with open('componentes2.json', 'r') as json_file:
     componentesJson = json.load(json_file)
 
+def verificar_componentes(componentes):
+    for tipo, opcoes in componentes.items():
+        for nome, dados in opcoes.items():
+            if "price" not in dados:
+                print(f"Erro: O componente '{nome}' do tipo '{tipo}' não contém o campo 'price'. Dados completos: {dados}")
+                return False
+    return True
+
 @app.route('/api/melhor_configuracao', methods=['POST'])
 def melhor_configuracao():
     data = request.json
     componentes = componentesJson
+    verificar_componentes(componentes)
     limite_valor = data.get('limite_valor')
     
 
